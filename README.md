@@ -14,7 +14,7 @@ Contents:
 Install prerequisites:
 
 ```bash
-sudo apt-get install python3-bloom debhelper dpkg-dev 
+sudo apt-get install python3-bloom fakeroot debhelper dpkg-dev
 ```
 
 Go to your package directory:
