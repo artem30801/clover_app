@@ -26,7 +26,7 @@ roscd clover_app
 Generate Debian files:
 
 ```bash
-bloom-generate rosdebian --os-name debian --os-version $(lsb_release -cs) --ros-distro $ROS_DISTRO
+bloom-generate rosdebian
 ```
 
 Build Debian package:
