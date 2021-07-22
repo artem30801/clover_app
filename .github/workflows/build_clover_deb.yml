@@ -6,7 +6,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Install ROS Noetic
+    - name: Install ROS Noetic
       run: |
         sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
         sudo apt install curl
@@ -15,17 +15,17 @@ jobs:
         sudo apt install ros-noetic-ros-base
         source /opt/ros/noetic/setup.bash
 
-      - name: Setup rosdep
+    - name: Setup rosdep
       run: |
           sudo apt install python3-rosdep
           sudo rosdep init
           rosdep update
 
-      - name: Install build dependencies
+    - name: Install build dependencies
       run: |
         sudo apt-get install python3-bloom fakeroot debhelper dpkg-dev
 
-      - name: Setup catkin workspace
+    - name: Setup catkin workspace
       run: |
           catkin_make
           source devel/setup.bash
