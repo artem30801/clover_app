@@ -8,7 +8,10 @@ jobs:
     container: ros:noetic-ros-base
     steps:
       - uses: actions/checkout@v2
-      - name: Install dependencies
+      - name: Install catkin
         run: |
           cd / && ./ros_entrypoint.sh
-          catkin_make
+          apt-get update
+          apt-get install -y ros-noetic-catkin python-catkin-tools
+          /bin/bash -c "source /opt/ros/noetic/setup.bash && catkin_make"
+
