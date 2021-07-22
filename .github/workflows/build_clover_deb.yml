@@ -12,6 +12,6 @@ jobs:
         run: |
           cd / && ./ros_entrypoint.sh
           apt-get update
-          apt-get install -y ros-noetic-catkin python-catkin-tools
+          apt-get install -y ros-noetic-catkinpython3-catkin-tools python3-osrf-pycommon
           /bin/bash -c "source /opt/ros/noetic/setup.bash && catkin_make"
 
