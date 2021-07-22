@@ -14,5 +14,6 @@ jobs:
           apt-get update
           apt-get install -y ros-noetic-catkin python3-catkin-tools python3-osrf-pycommon
       - name: Run catkin_make
+        run: |
           /bin/bash -c "source /opt/ros/noetic/setup.bash && catkin_make"
 
