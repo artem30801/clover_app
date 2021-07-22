@@ -4,28 +4,9 @@ on: [pull_request, push]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
+    container: ros:noetic-ros-base
     steps:
-    - name: Install ROS Noetic
-      run: |
-        sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
-        sudo apt install curl
-        curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
-        sudo apt update
-        sudo apt install ros-noetic-ros-base
-        source /opt/ros/noetic/setup.bash
-
-    - name: Setup rosdep
-      run: |
-          sudo apt install python3-rosdep
-          sudo rosdep init
-          rosdep update
-
-    - name: Install build dependencies
-      run: |
-        sudo apt-get install python3-bloom fakeroot debhelper dpkg-dev
-
-    - name: Setup catkin workspace
-      run: |
-          catkin_make
-          source devel/setup.bash
+      - name: Install dependencies
+        run: |
+          cd / && ./ros_entrypoint.sh
