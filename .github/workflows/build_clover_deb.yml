@@ -7,7 +7,8 @@ jobs:
     runs-on: ubuntu-20.04
     container: ros:noetic-ros-base
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
       - name: Install catkin
         run: |
@@ -21,9 +22,19 @@ jobs:
           cd ~/catkin_ws
           /bin/bash -c "source /opt/ros/noetic/setup.bash && catkin_make"
 
-      - name: Build package
+      - name: Build catkin package
         run: |
           cd ~/catkin_ws/src
           cp -r $GITHUB_WORKSPACE .
           cd ~/catkin_ws
           /bin/bash -c "source ~/catkin_ws/devel/setup.bash && catkin_make"
+
+      - name: Install builder dependencies
+        run: |
+          sudo apt-get install python3-bloom fakeroot debhelper dpkg-dev
+
+      - name: Build deb package
+        run: |
+          roscd clover_app
+          bloom-generate rosdebian
+          fakeroot debian/rules binary
