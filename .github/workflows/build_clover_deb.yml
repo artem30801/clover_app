@@ -26,4 +26,4 @@ jobs:
           cd ~/catkin_ws/src
           cp -r $GITHUB_WORKSPACE .
           cd ~/catkin_ws
-          /bin/bash -c "source ../devel/setup.bash && catkin_make"
+          /bin/bash -c "source ~/catkin_ws/devel/setup.bash && catkin_make"
