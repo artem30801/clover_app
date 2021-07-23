@@ -35,6 +35,6 @@ jobs:
 
       - name: Build deb package
         run: |
-          roscd clover_app
+          /bin/bash -c "source /opt/ros/noetic/setup.bash && roscd clover_app"
           bloom-generate rosdebian
           fakeroot debian/rules binary
