@@ -33,6 +33,11 @@ jobs:
         run: |
           apt-get install -y python3-bloom fakeroot debhelper dpkg-dev
 
+      - name: Init rosdep
+        run: |
+          sudo rosdep init
+          rosdep update
+
       - name: Build deb package
         run: |
           /bin/bash -c "source ~/catkin_ws/devel/setup.bash && roscd clover_app"
