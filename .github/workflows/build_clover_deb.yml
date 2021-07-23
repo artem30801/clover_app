@@ -10,6 +10,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Set up QEMU
+        id: qemu
+        uses: docker/setup-qemu-action@v1
+        with:
+          image: tonistiigi/binfmt:latest
+          platforms: all
+
+      - name: Available platforms
+        run: echo ${{ steps.qemu.outputs.platforms }}
+
       - name: Install catkin
         run: |
           cd / && ./ros_entrypoint.sh
@@ -44,4 +54,3 @@ jobs:
           /bin/bash -c "source ~/catkin_ws/devel/setup.bash && roscd clover_app"
           bloom-generate rosdebian
           fakeroot debian/rules binary
-    
