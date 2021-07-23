@@ -35,6 +35,7 @@ jobs:
 
       - name: Init rosdep
         run: |
+          rm /etc/ros/rosdep/sources.list.d/20-default.list
           sudo rosdep init
           rosdep update
 
