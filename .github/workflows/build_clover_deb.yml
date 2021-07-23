@@ -42,7 +42,6 @@ jobs:
       - name: Build deb package
         run: |
           /bin/bash -c "source ~/catkin_ws/devel/setup.bash && roscd clover_app"
-          echo Roscd executed
           bloom-generate rosdebian
-          echo Bloom generated
           fakeroot debian/rules binary
+    
