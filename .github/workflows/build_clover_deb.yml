@@ -11,14 +11,8 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Set up QEMU
-        id: qemu
-        uses: docker/setup-qemu-action@v1
-        with:
-          image: tonistiigi/binfmt:latest
-          platforms: all
-
-      - name: Available platforms
-        run: echo ${{ steps.qemu.outputs.platforms }}
+        run: |
+          apt-get install -y qemu-kvm qemu
 
       - name: Install catkin
         run: |
