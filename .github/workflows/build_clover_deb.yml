@@ -25,6 +25,5 @@ jobs:
         run: |
           cd ~/catkin_ws/src
           cp -r $GITHUB_WORKSPACE .
-          echo $ROS_PACKAGE_PATH
-          ls
+          cd ~/catkin_ws
           /bin/bash -c "source ../devel/setup.bash && catkin_make"
