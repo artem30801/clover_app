@@ -31,7 +31,7 @@ jobs:
 
       - name: Install builder dependencies
         run: |
-          sudo apt-get install python3-bloom fakeroot debhelper dpkg-dev
+          apt-get install -y python3-bloom fakeroot debhelper dpkg-dev
 
       - name: Build deb package
         run: |
