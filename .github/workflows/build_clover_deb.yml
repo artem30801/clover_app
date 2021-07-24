@@ -9,7 +9,7 @@ jobs:
     steps:
       - name: Start RPi VM
         run: |
-          docker run -it lukechilds/dockerpi
+          docker run -i lukechilds/dockerpi
           echo Hello
           dpkg-architecture -q DEB_BUILD_ARCH
 
