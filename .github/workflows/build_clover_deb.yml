@@ -5,46 +5,52 @@ on: [pull_request, push]
 jobs:
   build:
     runs-on: ubuntu-20.04
-    container: ros:noetic-ros-base
+#    container: ros:noetic-ros-base
     steps:
+      - name: Start RPi VM
+        run: |
+          docker run -it lukechilds/dockerpi
+          echo Hello
+          dpkg-architecture -q DEB_BUILD_ARCH
+
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set up QEMU
-        run: |
-          apt-get install -y qemu-kvm qemu
-
-      - name: Install catkin
-        run: |
-          cd / && ./ros_entrypoint.sh
-          apt-get update
-          apt-get install -y ros-noetic-catkin python3-catkin-tools python3-osrf-pycommon
-
-      - name: Setup catkin workspace
-        run: |
-          mkdir -p ~/catkin_ws/src
-          cd ~/catkin_ws
-          /bin/bash -c "source /opt/ros/noetic/setup.bash && catkin_make"
-
-      - name: Build catkin package
-        run: |
-          cd ~/catkin_ws/src
-          cp -r $GITHUB_WORKSPACE .
-          cd ~/catkin_ws
-          /bin/bash -c "source ~/catkin_ws/devel/setup.bash && catkin_make"
-
-      - name: Install builder dependencies
-        run: |
-          apt-get install -y python3-bloom fakeroot debhelper dpkg-dev
-
-      - name: Init rosdep
-        run: |
-          rm /etc/ros/rosdep/sources.list.d/20-default.list
-          sudo rosdep init
-          rosdep update
-
-      - name: Build deb package
-        run: |
-          /bin/bash -c "source ~/catkin_ws/devel/setup.bash && roscd clover_app"
-          bloom-generate rosdebian
-          fakeroot debian/rules binary
+#      - name: Set up QEMU
+#        run: |
+#          apt-get install -y qemu-kvm qemu
+#
+#      - name: Install catkin
+#        run: |
+#          cd / && ./ros_entrypoint.sh
+#          apt-get update
+#          apt-get install -y ros-noetic-catkin python3-catkin-tools python3-osrf-pycommon
+#
+#      - name: Setup catkin workspace
+#        run: |
+#          mkdir -p ~/catkin_ws/src
+#          cd ~/catkin_ws
+#          /bin/bash -c "source /opt/ros/noetic/setup.bash && catkin_make"
+#
+#      - name: Build catkin package
+#        run: |
+#          cd ~/catkin_ws/src
+#          cp -r $GITHUB_WORKSPACE .
+#          cd ~/catkin_ws
+#          /bin/bash -c "source ~/catkin_ws/devel/setup.bash && catkin_make"
+#
+#      - name: Install builder dependencies
+#        run: |
+#          apt-get install -y python3-bloom fakeroot debhelper dpkg-dev
+#
+#      - name: Init rosdep
+#        run: |
+#          rm /etc/ros/rosdep/sources.list.d/20-default.list
+#          sudo rosdep init
+#          rosdep update
+#
+#      - name: Build deb package
+#        run: |
+#          /bin/bash -c "source ~/catkin_ws/devel/setup.bash && roscd clover_app"
+#          bloom-generate rosdebian
+#          fakeroot debian/rules binary
