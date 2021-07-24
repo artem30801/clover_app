@@ -8,7 +8,7 @@ jobs:
 #    container: ros:noetic-ros-base
     services:
       rpios:
-        image: ghcr.io/carlosperate/qemu-rpi-os-lite:buster-extended-latest
+        image: ghcr.io/carlosperate/qemu-rpi-os-lite:buster-latest
         ports: ["5022:5022"]
     steps:
       - name: Wait 2m30s for the docker image to start up QEMU and Raspberry Pi OS
