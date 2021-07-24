@@ -6,15 +6,26 @@ jobs:
   build:
     runs-on: ubuntu-20.04
 #    container: ros:noetic-ros-base
+    services:
+      rpios:
+        image: ghcr.io/carlosperate/qemu-rpi-os-lite:buster-extended-latest
+        ports: ["5022:5022"]
     steps:
-      - name: Start RPi VM
-        run: |
-          docker run -i lukechilds/dockerpi
-          echo Hello
-          dpkg-architecture -q DEB_BUILD_ARCH
+      - name: Wait 2m30s for the docker image to start up QEMU and Raspberry Pi OS
+        run: sleep 150
+      - name: Test
+        uses: appleboy/ssh-action@master
+        with:
+          host: rpios
+          username: pi
+          password: raspberry
+          port:  ${{ job.services.rpios.ports[5022] }}
+          script: |
+            echo hello
+            dpkg-architecture -q DEB_BUILD_ARCH
 
-      - name: Checkout repository
-        uses: actions/checkout@v2
+#      - name: Checkout repository
+#        uses: actions/checkout@v2
 
 #      - name: Set up QEMU
 #        run: |
