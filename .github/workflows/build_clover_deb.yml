@@ -30,6 +30,7 @@ jobs:
           username: pi
           password: raspberry
           port: ${{ job.services.rpios.ports[5022] }}
+          command_timeout: 90m
           script: |
             sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu buster main" > /etc/apt/sources.list.d/ros-noetic.list'
             sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
