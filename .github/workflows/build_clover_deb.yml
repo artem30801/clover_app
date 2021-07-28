@@ -20,7 +20,7 @@ jobs:
           host: rpios
           username: pi
           password: raspberry
-          port:  ${{ job.services.rpios.ports[5022] }}
+          port: 5022
           script: |
             echo Architecture:
             dpkg-architecture -q DEB_BUILD_ARCH
