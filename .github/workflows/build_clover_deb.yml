@@ -9,10 +9,10 @@ jobs:
     services:
       rpios:
         image: ghcr.io/artem30801/docker-qemu-clover:v0.3a
-        ports: ["5022:5022"]
+        ports: ["5022:22"]
     steps:
-      - name: Wait 10m for the docker image to start up QEMU and Raspberry Pi OS (clover image)
-        run: sleep 600
+      - name: Wait 3m for the docker image to start up QEMU and Raspberry Pi OS (clover image)
+        run: sleep 180
 
       - name: Check processor architecture
         uses: appleboy/ssh-action@master
